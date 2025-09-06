@@ -96,6 +96,11 @@ JWT_EXPIRES_IN=7d
 # CORS Configuration
 FRONTEND_URL=http://localhost:5173
 
+# Cloudinary Configuration (for image uploads)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
 # Security
 BCRYPT_ROUNDS=12
 ```

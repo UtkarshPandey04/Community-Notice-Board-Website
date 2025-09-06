@@ -232,24 +232,27 @@ export const AuthProvider = ({ children }) => {
   const uploadProfilePicture = useCallback(async (file) => {
     try {
       const formData = new FormData();
-      formData.append('profilePicture', file);
+      formData.append('image', file);
 
-      const res = await fetchWithAuth('/api/auth/upload-profile-picture', {
+      const res = await fetchWithAuth('/api/upload', {
         method: 'POST',
         body: formData,
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        const data = await res.json();
-        // After uploading, we need to update the user's profile with the new URL
-        const updateResult = await updateProfile({ profilePicture: data.profilePictureUrl });
+        const updateResult = await updateProfile({ profilePicture: data.url });
         if (updateResult.success) {
-          return { success: true, profilePictureUrl: data.profilePictureUrl };
+          return { success: true, profilePictureUrl: data.url };
         }
-        return { success: false, message: updateResult.message || 'Failed to update profile with new picture.' };
+        return {
+          success: false,
+          message: updateResult.message || 'Failed to update profile with new picture.',
+        };
       }
-      const errorData = await res.json();
-      return { success: false, message: errorData.message || 'Profile picture upload failed' };
+
+      return { success: false, message: data.message || 'Profile picture upload failed' };
     } catch (error) {
       return { success: false, message: 'Network error. Please try again.' };
     }

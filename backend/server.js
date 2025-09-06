@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
+import uploadRoutes from './routes/upload.js';
 import userRoutes from './routes/users.js';
 import announcementRoutes from './routes/announcements.js';
 import eventRoutes from './routes/events.js';
@@ -17,6 +18,22 @@ import activityRoutes from './routes/activity.js';
 
 // Load environment variables
 dotenv.config();
+
+// Check for required environment variables
+const requiredEnv = [
+  'MONGODB_URI',
+  'JWT_SECRET',
+  'CLOUDINARY_CLOUD_NAME',
+  'CLOUDINARY_API_KEY',
+  'CLOUDINARY_API_SECRET',
+];
+const missingEnv = requiredEnv.filter((key) => !process.env[key]);
+
+if (missingEnv.length > 0) {
+  console.error(`❌ Missing required environment variables: ${missingEnv.join(', ')}`);
+  console.error('Please check your .env file and ensure all required variables are set.');
+  process.exit(1);
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,10 +56,6 @@ app.use(
 // Make __dirname available in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Serve static files from the 'public' directory
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-
 
 // Rate limiting
 const limiter = rateLimit({
@@ -104,6 +117,7 @@ app.get('/api/health', (req, res) => {
 
 // API routes
 app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/events', eventRoutes);

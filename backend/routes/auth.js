@@ -1,45 +1,11 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
-import fs from 'fs';
-import multer from 'multer';
-import path from 'path';
+
 import User from '../models/User.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
-
-// Ensure the upload directory exists
-const uploadDir = 'public/uploads';
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Multer setup for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-  }
-});
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1024 * 1024 * 5 }, // 5MB limit
-  fileFilter: function (req, file, cb) {
-    const filetypes = /jpeg|jpg|png|gif/;
-    const mimetype = filetypes.test(file.mimetype);
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-    if (mimetype && extname) {
-      return cb(null, true);
-    }
-    cb(new Error('Upload failed: Only image files (jpeg, jpg, png, gif) are allowed.'));
-  }
-});
 
 // Generate JWT token
 const generateToken = (userId) => {
@@ -49,36 +15,6 @@ const generateToken = (userId) => {
     { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
   );
 };
-
-// @route   POST /api/auth/upload-profile-picture
-// @desc    Upload a profile picture
-// @access  Private
-router.post('/upload-profile-picture', authenticateToken, (req, res) => {
-  const uploader = upload.single('profilePicture');
-
-  uploader(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      // A Multer error occurred when uploading (e.g., file size limit).
-      return res.status(400).json({ message: err.code === 'LIMIT_FILE_SIZE' ? 'File is too large. Maximum size is 5MB.' : err.message });
-    } else if (err) {
-      // An unknown error occurred when uploading (e.g., file type filter).
-      return res.status(400).json({ message: err.message });
-    }
-
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded.' });
-    }
-
-    // The file is now available at req.file. We return its public URL.
-    // Construct an absolute URL to avoid issues with client-side relative path resolution.
-    const baseUrl = `${req.protocol}://${req.get('host')}`;
-    const profilePictureUrl = `${baseUrl}/uploads/${req.file.filename}`;
-    res.json({
-      message: 'File uploaded successfully',
-      profilePictureUrl: profilePictureUrl
-    });
-  });
-});
 
 // @route   GET /api/auth/register
 // @desc    Get registration form info (for testing)
