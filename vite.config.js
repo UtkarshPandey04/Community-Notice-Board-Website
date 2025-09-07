@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     port: 5173,
     proxy: {
-      '/api': 'http://localhost:5000', // Express backend
+      '/api': 'https://community-notice-board-website.vercel.app/', // Express backend
     },
   },
   build: {

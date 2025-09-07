@@ -229,10 +229,10 @@ You can test the API endpoints using tools like:
 
 ```bash
 # Test health endpoint
-curl http://localhost:5000/api/health
+curl https://community-notice-board-website.vercel.app//api/health
 
 # Test user registration
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST https://community-notice-board-website.vercel.app//api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",

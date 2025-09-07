@@ -41,7 +41,7 @@ if not exist ".env" (
 
 REM Start the development server
 echo Starting development server...
-echo Backend will be available at: http://localhost:5000
+echo Backend will be available at: https://community-notice-board-website.vercel.app/
 echo Frontend should be running at: http://localhost:5173
 echo.
 echo Press Ctrl+C to stop the server
