@@ -1,7 +1,7 @@
 // Simple API test script for the backend
 // Run this after starting the backend server
 
-const BASE_URL = 'https://community-notice-board-website.vercel.app/api';
+const BASE_URL = process.env.API_URL || 'http://localhost:5000/api';
 
 async function testAPI() {
   console.log('🧪 Testing ShadCN UI Backend API...\n');
