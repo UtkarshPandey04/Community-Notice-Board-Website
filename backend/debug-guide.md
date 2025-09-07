@@ -123,9 +123,9 @@ If you see errors, they will help identify the issue.
 
 Once working, test these endpoints:
 
-- https://community-notice-board-website.vercel.app//api/health
-- https://community-notice-board-website.vercel.app//api/auth/register (POST)
-- https://community-notice-board-website.vercel.app//api/announcements/categories/list
+- https://community-notice-board-website.vercel.app/api/health
+- https://community-notice-board-website.vercel.app/api/auth/register (POST)
+- https://community-notice-board-website.vercel.app/api/announcements/categories/list
 
 ## 🆘 **Still Having Issues?**
 
@@ -148,5 +148,5 @@ npm install
 npm run dev
 
 # Test health endpoint
-curl https://community-notice-board-website.vercel.app//api/health
+curl https://community-notice-board-website.vercel.app/api/health
 ```
