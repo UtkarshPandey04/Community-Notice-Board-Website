@@ -232,7 +232,7 @@ You can test the API endpoints using tools like:
 curl https://community-notice-board-website.vercel.app/api/health
 
 # Test user registration
-curl -X POST https://community-notice-board-website.vercel.app/api/auth/register \
+curl -X POST https://community-notice-board-backend.vercel.app/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "test@example.com",

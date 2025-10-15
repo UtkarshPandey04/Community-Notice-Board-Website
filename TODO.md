@@ -1,0 +1,5 @@
+- [x] Update frontend .env with VITE_API_BASE_URL
+- [x] Update backend env.example with required env vars
+- [x] Update README.md with correct backend URL
+- [ ] Set env vars in Vercel dashboard
+- [x] Test deployed app (Backend deployment not found - needs redeployment)

@@ -2,6 +2,11 @@
 
 This is a full-stack community notice board application with a React frontend and a Node.js backend.
 
+## 🚀 Live Demo
+
+- **Frontend**: https://dcommunitynoticeboard.netlify.app/
+- **Backend**: https://community-notice-board-backend.vercel.app/
+
 ## Frontend Setup
 
 The frontend is built with Vite and React.
