@@ -18,13 +18,17 @@ export default defineConfig(({ mode }) => ({
   },
   server: {
     port: 5173,
+    allowedHosts: [
+      'terrie-subepithelial-ruthie.ngrok-free.dev'
+    ],
     proxy: {
       '/api': {
         target: 'http://localhost:5000', // Your local backend server
         changeOrigin: true,
-      },
-    },
-  },
+      }
+    }
+  }
+  ,
   build: {
     outDir: 'dist',
     sourcemap: mode === 'development' ? true : 'hidden',
