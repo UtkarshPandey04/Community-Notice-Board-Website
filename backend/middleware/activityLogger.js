@@ -1,4 +1,4 @@
-import ActivityLog from '../models/ActivityLog.js';
+const ActivityLog = require('../models/ActivityLog.js');
 
 const activityLogger = async (req, res, next) => {
   const logData = {
@@ -19,4 +19,4 @@ const activityLogger = async (req, res, next) => {
   next();
 };
 
-export default activityLogger;
+module.exports = activityLogger;

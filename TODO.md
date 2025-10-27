@@ -1,16 +1,23 @@
-# TODO: Fix Vercel Build Timeout
-
-## Approved Plan
-
-- Optimize MongoDB connection in server.js to connect lazily instead of at module load.
-- Review backend/package.json for unused dependencies and remove them.
-- Verify changes and redeploy to test build time.
+# Convert Backend to CommonJS for Vercel Deployment
 
 ## Steps to Complete
 
-- [x] Modify server.js to move mongoose.connect to a lazy connection function.
-- [x] Remove unused dependencies from backend/package.json (e.g., nodemon from devDependencies).
-- [x] Update TODO.md with completion status after each step.
-- [x] Test server startup and basic API functionality locally (server starts, MongoDB connects lazily, health endpoint responds).
-- [x] Remove backend dependencies from root package.json to avoid conflicts.
-- [ ] Redeploy to Vercel and monitor build time.
+- [x] Remove "type": "module" from backend/package.json
+- [x] Convert backend/server.js to CommonJS
+- [x] Convert backend/routes/auth.js to CommonJS
+- [x] Convert backend/routes/upload.js to CommonJS
+- [x] Convert backend/routes/users.js to CommonJS
+- [x] Convert backend/routes/announcements.js to CommonJS
+- [x] Convert backend/routes/events.js to CommonJS
+- [x] Convert backend/routes/marketplace.js to CommonJS
+- [x] Convert backend/routes/contacts.js to CommonJS
+- [x] Convert backend/routes/posts.js to CommonJS
+- [x] Convert backend/routes/activity.js to CommonJS
+- [x] Convert backend/models/User.js to CommonJS
+- [x] Convert backend/models/Post.js to CommonJS
+- [x] Convert backend/models/ActivityLog.js to CommonJS
+- [x] Convert backend/middleware/auth.js to CommonJS
+- [x] Convert backend/middleware/activityLogger.js to CommonJS
+- [x] Convert backend/config/database.js to CommonJS
+- [x] Convert backend/utils/cloudinary.js to CommonJS
+- [x] Redeploy to Vercel and test

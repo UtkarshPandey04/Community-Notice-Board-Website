@@ -1,20 +1,19 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import authRoutes from './routes/auth.js';
-import uploadRoutes from './routes/upload.js';
-import userRoutes from './routes/users.js';
-import announcementRoutes from './routes/announcements.js';
-import eventRoutes from './routes/events.js';
-import marketplaceRoutes from './routes/marketplace.js';
-import contactRoutes from './routes/contacts.js';
-import postRoutes from './routes/posts.js';
-import activityRoutes from './routes/activity.js';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const dotenv = require('dotenv');
+const path = require('path');
+const authRoutes = require('./routes/auth.js');
+const uploadRoutes = require('./routes/upload.js');
+const userRoutes = require('./routes/users.js');
+const announcementRoutes = require('./routes/announcements.js');
+const eventRoutes = require('./routes/events.js');
+const marketplaceRoutes = require('./routes/marketplace.js');
+const contactRoutes = require('./routes/contacts.js');
+const postRoutes = require('./routes/posts.js');
+const activityRoutes = require('./routes/activity.js');
 
 // Load environment variables
 dotenv.config();
@@ -77,9 +76,7 @@ app.use(
   })
 );
 
-// Make __dirname available in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// __dirname is available in CommonJS by default
 
 // Rate limiting
 const limiter = rateLimit({
@@ -185,4 +182,4 @@ if (!process.env.VERCEL) {
 }
 
 // Export for Vercel serverless functions
-export default app;
+module.exports = app;

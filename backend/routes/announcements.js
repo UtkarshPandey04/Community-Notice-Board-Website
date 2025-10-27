@@ -1,6 +1,6 @@
-import express from 'express';
-import { body, validationResult } from 'express-validator';
-import { authenticateToken, requireAdminOrModerator, optionalAuth } from '../middleware/auth.js';
+const express = require('express');
+const { body, validationResult } = require('express-validator');
+const { authenticateToken, requireAdminOrModerator, optionalAuth } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -315,4 +315,4 @@ router.get('/priorities/list', (req, res) => {
   res.json({ priorities });
 });
 
-export default router;
+module.exports = router;

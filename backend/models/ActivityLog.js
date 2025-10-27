@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const activityLogSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now },
@@ -9,4 +9,4 @@ const activityLogSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
-export default mongoose.model('ActivityLog', activityLogSchema);
+module.exports = mongoose.model('ActivityLog', activityLogSchema);

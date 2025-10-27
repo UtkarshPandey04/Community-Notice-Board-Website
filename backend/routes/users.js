@@ -1,7 +1,7 @@
-import express from 'express';
-import { body, validationResult } from 'express-validator';
-import User from '../models/User.js';
-import { authenticateToken, requireAdmin, requireAdminOrModerator } from '../middleware/auth.js';
+const express = require('express');
+const { body, validationResult } = require('express-validator');
+const User = require('../models/User.js');
+const { authenticateToken, requireAdmin, requireAdminOrModerator } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -268,4 +268,4 @@ router.get('/stats/overview', authenticateToken, requireAdmin, async (req, res) 
   }
 });
 
-export default router;
+module.exports = router;

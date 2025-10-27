@@ -1,9 +1,9 @@
-import express from 'express';
-import jwt from 'jsonwebtoken';
-import { body, validationResult } from 'express-validator';
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const { body, validationResult } = require('express-validator');
 
-import User from '../models/User.js';
-import { authenticateToken } from '../middleware/auth.js';
+const User = require('../models/User.js');
+const { authenticateToken } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -413,4 +413,4 @@ router.get('/validate-token', authenticateToken, (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

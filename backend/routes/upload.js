@@ -1,8 +1,8 @@
-import express from 'express';
-import multer from 'multer';
-import { Readable } from 'stream';
-import { v2 as cloudinary } from 'cloudinary';
-import { authenticateToken } from '../middleware/auth.js';
+const express = require('express');
+const multer = require('multer');
+const { Readable } = require('stream');
+const { v2: cloudinary } = require('cloudinary');
+const { authenticateToken } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -51,4 +51,4 @@ router.post('/', authenticateToken, upload.single('image'), async (req, res) => 
   }
 });
 
-export default router;
+module.exports = router;

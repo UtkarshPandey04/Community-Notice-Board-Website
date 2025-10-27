@@ -1,6 +1,6 @@
-import express from 'express';
-import { authenticateToken } from '../middleware/auth.js';
-import ActivityLog from '../models/ActivityLog.js';
+const express = require('express');
+const { authenticateToken } = require('../middleware/auth.js');
+const ActivityLog = require('../models/ActivityLog.js');
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -1,7 +1,7 @@
-import express from 'express';
-import { body, validationResult } from 'express-validator';
-import { authenticateToken, requireRole } from '../middleware/auth.js';
-import Post from '../models/Post.js';
+const express = require('express');
+const { body, validationResult } = require('express-validator');
+const { authenticateToken, requireRole } = require('../middleware/auth.js');
+const Post = require('../models/Post.js');
 
 const router = express.Router();
 
@@ -434,4 +434,4 @@ router.delete('/:id/comment/:commentId', authenticateToken, async (req, res) => 
   }
 });
 
-export default router;
+module.exports = router;

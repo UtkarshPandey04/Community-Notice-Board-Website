@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for shadcn-ui frontend with MongoDB and authentication",
   "main": "server.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",

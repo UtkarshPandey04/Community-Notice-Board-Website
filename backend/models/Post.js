@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -145,4 +145,4 @@ postSchema.methods.addComment = function(userId, userName, content) {
 
 const Post = mongoose.model('Post', postSchema);
 
-export default Post;
+module.exports = Post;
