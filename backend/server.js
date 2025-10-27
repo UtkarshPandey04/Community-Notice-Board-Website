@@ -38,6 +38,30 @@ if (missingEnv.length > 0) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Lazy MongoDB connection function
+let isConnected = false;
+const connectToMongoDB = async () => {
+  if (isConnected) return;
+  try {
+    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shadcn-ui-db');
+    isConnected = true;
+    console.log('✅ Connected to MongoDB successfully');
+  } catch (error) {
+    console.error('❌ MongoDB connection error:', error);
+    throw error;
+  }
+};
+
+// Middleware to ensure DB connection before handling requests
+app.use(async (req, res, next) => {
+  try {
+    await connectToMongoDB();
+    next();
+  } catch (error) {
+    res.status(500).json({ error: 'Database connection failed' });
+  }
+});
+
 // Security middleware
 app.use(
   helmet({
@@ -74,16 +98,6 @@ app.use(cors({
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shadcn-ui-db')
-  .then(() => {
-    console.log('✅ Connected to MongoDB successfully');
-  })
-  .catch((error) => {
-    console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
-  });
 
 // Root route
 app.get('/', (req, res) => {

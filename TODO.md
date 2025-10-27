@@ -1,5 +1,14 @@
-- [x] Update frontend .env with VITE_API_BASE_URL
-- [x] Update backend env.example with required env vars
-- [x] Update README.md with correct backend URL
-- [ ] Set env vars in Vercel dashboard
-- [x] Test deployed app (Backend deployment not found - needs redeployment)
+# TODO: Fix Vercel Build Timeout
+
+## Approved Plan
+
+- Optimize MongoDB connection in server.js to connect lazily instead of at module load.
+- Review backend/package.json for unused dependencies and remove them.
+- Verify changes and redeploy to test build time.
+
+## Steps to Complete
+
+- [x] Modify server.js to move mongoose.connect to a lazy connection function.
+- [x] Remove unused dependencies from backend/package.json (e.g., nodemon from devDependencies).
+- [x] Update TODO.md with completion status after each step.
+- [ ] Redeploy to Vercel and monitor build time.
