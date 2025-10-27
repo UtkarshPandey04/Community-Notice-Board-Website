@@ -11,4 +11,5 @@
 - [x] Modify server.js to move mongoose.connect to a lazy connection function.
 - [x] Remove unused dependencies from backend/package.json (e.g., nodemon from devDependencies).
 - [x] Update TODO.md with completion status after each step.
+- [x] Test server startup and basic API functionality locally (server starts, MongoDB connects lazily, health endpoint responds).
 - [ ] Redeploy to Vercel and monitor build time.
