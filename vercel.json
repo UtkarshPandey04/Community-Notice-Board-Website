@@ -20,5 +20,6 @@
     "backend/server.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "installCommand": "npm install && cd backend && npm install"
 }
