@@ -2,8 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/server.js",
-      "use": "@vercel/node"
+      "src": "backend/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["backend/**"]
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
@@ -20,6 +30,5 @@
     "backend/server.js": {
       "maxDuration": 10
     }
-  },
-  "installCommand": "npm install && npm install --prefix backend"
+  }
 }
