@@ -12,5 +12,5 @@
 - [x] Remove unused dependencies from backend/package.json (e.g., nodemon from devDependencies).
 - [x] Update TODO.md with completion status after each step.
 - [x] Test server startup and basic API functionality locally (server starts, MongoDB connects lazily, health endpoint responds).
-- [x] Update vercel.json to include backend files in build.
+- [x] Remove backend dependencies from root package.json to avoid conflicts.
 - [ ] Redeploy to Vercel and monitor build time.
