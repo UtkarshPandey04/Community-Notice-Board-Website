@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => ({
     ],
     proxy: {
       '/api': {
-        target: 'http://localhost:5000', // Your local backend server
+        target: 'https://community-notice-board-website.vercel.app', // Your deployed backend server
         changeOrigin: true,
       }
     }
