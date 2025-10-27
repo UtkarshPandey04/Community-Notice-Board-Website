@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => ({
     ],
     proxy: {
       '/api': {
-        target: 'https://community-notice-board-website.vercel.app', // Your deployed backend server
+        target: 'https://community-notice-board-backend.vercel.app', // Your deployed backend server
         changeOrigin: true,
       }
     }
