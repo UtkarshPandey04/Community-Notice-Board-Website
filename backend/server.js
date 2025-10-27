@@ -37,14 +37,32 @@ if (missingEnv.length > 0) {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Lazy MongoDB connection function
-let isConnected = false;
+// MongoDB connection with serverless caching
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectToMongoDB = async () => {
-  if (isConnected) return;
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shadcn-ui-db', opts).then((mongoose) => {
+      return mongoose;
+    });
+  }
+
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shadcn-ui-db');
-    isConnected = true;
+    cached.conn = await cached.promise;
     console.log('✅ Connected to MongoDB successfully');
+    return cached.conn;
   } catch (error) {
     console.error('❌ MongoDB connection error:', error);
     throw error;
@@ -87,8 +105,23 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
+const allowedOrigins = [
+  'https://dcommunitynoticeboard.netlify.app',
+  'http://localhost:5173',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: 'https://dcommunitynoticeboard.netlify.app',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
@@ -149,21 +182,29 @@ app.use('*', (req, res) => {
 // Global error handler
 app.use((error, req, res, next) => {
   console.error('Global error handler:', error);
-  
+
+  // CORS error handling
+  if (error.message === 'Not allowed by CORS') {
+    return res.status(403).json({
+      error: 'CORS Error',
+      message: 'Origin not allowed'
+    });
+  }
+
   if (error.name === 'ValidationError') {
     return res.status(400).json({
       error: 'Validation Error',
       details: Object.values(error.errors).map(err => err.message)
     });
   }
-  
+
   if (error.name === 'MongoError' && error.code === 11000) {
     return res.status(400).json({
       error: 'Duplicate field value',
       message: 'A record with this information already exists'
     });
   }
-  
+
   res.status(500).json({
     error: 'Internal Server Error',
     message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'

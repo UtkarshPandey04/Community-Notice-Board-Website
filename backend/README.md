@@ -210,6 +210,31 @@ npm run dev
 npm start
 ```
 
+### Vercel Deployment
+
+The backend is configured for serverless deployment on Vercel:
+
+1. **Environment Variables**: Set all required environment variables in your Vercel project settings:
+
+   - `MONGODB_URI`
+   - `JWT_SECRET`
+   - `CLOUDINARY_CLOUD_NAME`
+   - `CLOUDINARY_API_KEY`
+   - `CLOUDINARY_API_SECRET`
+   - `FRONTEND_URL` (optional, for additional CORS origins)
+
+2. **Deployment**: Push to your Git repository connected to Vercel, or use Vercel CLI:
+
+   ```bash
+   vercel --prod
+   ```
+
+3. **Troubleshooting**:
+   - Check Vercel function logs for errors
+   - Ensure MongoDB connection string allows connections from Vercel's IP ranges
+   - Verify all environment variables are set correctly
+   - Test API endpoints using the deployed URL
+
 ### Build for Production
 
 ```bash
