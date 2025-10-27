@@ -21,6 +21,5 @@
       "maxDuration": 10
     }
   },
-  "installCommand": "npm install",
-  "buildCommand": "cd backend && npm install"
+  "installCommand": "npm install && npm install --prefix backend"
 }
