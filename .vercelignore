@@ -131,3 +131,5 @@ backend/debug-guide.md
 backend/README.md
 backend/package-lock.json
 backend/public/uploads/
+backend/.env
+backend/env.example

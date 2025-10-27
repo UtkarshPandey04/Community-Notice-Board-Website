@@ -15,5 +15,10 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "backend/server.js": {
+      "maxDuration": 10
+    }
+  }
 }
