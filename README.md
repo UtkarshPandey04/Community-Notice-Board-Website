@@ -4,8 +4,8 @@ This is a full-stack community notice board application with a React frontend an
 
 ## 🚀 Live Demo
 
-- **Frontend**: https://shadcn-ui-ivory-five.vercel.app/
-- **Backend**: https://community-notice-board-backend.vercel.app/
+- **deployed_at**: https://shadcn-ui-ivory-five.vercel.app/
+
 
 ## Frontend Setup
 
