@@ -27,5 +27,6 @@
       "dest": "/index.html"
     }
   ],
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "installCommand": "npm install"
 }

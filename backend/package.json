@@ -6,9 +6,10 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
+    "dev": "npm install && node server.js",
     "build": "echo 'No build step required for Node.js'",
-    "vercel-build": "echo 'No build step required for Vercel'",
+    "vercel-build": "npm install",
+    "vercel-install": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
