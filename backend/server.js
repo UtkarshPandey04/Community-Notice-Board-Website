@@ -131,28 +131,28 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Root route
 app.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'ShadCN UI Backend API',
     version: '1.0.0',
     timestamp: new Date().toISOString(),
     endpoints: {
-      health: '/api/health',
-      auth: '/api/auth',
-      users: '/api/users',
-      announcements: '/api/announcements',
-      events: '/api/events',
-      marketplace: '/api/marketplace',
-      contacts: '/api/contacts',
-      activity: '/api/activity'
+      health: '/health',
+      auth: '/auth',
+      users: '/users',
+      announcements: '/announcements',
+      events: '/events',
+      marketplace: '/marketplace',
+      contacts: '/contacts',
+      activity: '/activity'
     },
     status: 'Server is running'
   });
 });
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'OK',
     message: 'Server is running',
     timestamp: new Date().toISOString(),
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
@@ -172,7 +172,7 @@ app.use('/api/activity', activityRoutes);
 
 // 404 handler for undefined routes
 app.use('*', (req, res) => {
-  res.status(404).json({ 
+  res.status(404).json({
     error: 'Route not found',
     path: req.originalUrl,
     method: req.method

@@ -1,7 +1,7 @@
 // The base URL for the API.
 // In development, this will be an empty string, and Vite's proxy will handle redirecting `/api` requests.
 // In production, it will be the full URL of your deployed backend.
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://shadcn-1zih7nt1z-utkarsh-pandeys-projects-604c39de.vercel.app';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://community-notice-board-backend.vercel.app';
 
 /**
  * A wrapper around the Fetch API to automatically handle base URLs and headers.
