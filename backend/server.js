@@ -106,7 +106,7 @@ app.use('/api/', limiter);
 
 // CORS configuration
 const allowedOrigins = [
-  'https://dcommunitynoticeboard.netlify.app',
+  'https://shadcn-ui-ivory-five.vercel.app',
   'http://localhost:5173',
   process.env.FRONTEND_URL
 ].filter(Boolean);
